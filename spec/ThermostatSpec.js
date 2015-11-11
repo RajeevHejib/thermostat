@@ -23,4 +23,19 @@ describe("Thermostat", function(){
     expect(thermostat.temperature).toEqual(19);
   });
 
+  it("temperature will not decrease below 10 degrees", function(){
+    for (i = 1; i <= 10; i++) {
+        thermostat.decreaseTemperature();
+    }
+    expect(function(){thermostat.decreaseTemperature();}).toThrow("Temperature already at minimum temperature");
+    expect(thermostat.temperature).toEqual(10);
+  });
+
+  it ("temperature will not increase above 32 degrees", function(){
+    for (i = 1; i <= 12; i++) {
+      thermostat.increaseTemperature();
+    }
+    expect(function(){thermostat.increaseTemperature();}).toThrow("Temperature already at maximum temperature");
+    expect(thermostat.temperature).toEqual(32);
+  });
 });
