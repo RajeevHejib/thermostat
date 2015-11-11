@@ -32,10 +32,40 @@ describe("Thermostat", function(){
   });
 
   it ("temperature will not increase above 32 degrees", function(){
+    thermostat.turnOffPowerSavingMode();
     for (i = 1; i <= 12; i++) {
       thermostat.increaseTemperature();
     }
     expect(function(){thermostat.increaseTemperature();}).toThrow("Temperature already at maximum temperature");
     expect(thermostat.temperature).toEqual(32);
   });
+
+  it ("by default, power-saving mode is on", function(){
+    expect(thermostat.powerSavingMode).toBe(true);
+  });
+
+  it ("power-saving mode can be turned off", function(){
+    thermostat.turnOffPowerSavingMode();
+    expect(thermostat.powerSavingMode).toBe(false);
+  });
+
+  it ("power-saving mode can be turned on", function(){
+    thermostat.turnOnPowerSavingMode();
+    expect(thermostat.powerSavingMode).toBe(true);
+  });
+
+  it ("when power-saving mode on, the temperature will not rise above 25 degrees", function(){
+    thermostat.turnOnPowerSavingMode();
+    for (i = 1; i <= 5; i++) {
+      thermostat.increaseTemperature();
+    }
+    expect(function(){thermostat.increaseTemperature();}).toThrow("Temperature already at maximum temperature");
+    expect(thermostat.temperature).toEqual(25);
+  });
 });
+
+
+
+
+
+
