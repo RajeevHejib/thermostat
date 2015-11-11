@@ -6,15 +6,50 @@
   <body>
     <div id='buttons'>
       <ul>
-        <li><button id='power_saving_mode'>Power Saving Mode</button></li>
+        <li><button id='power_saving_on'>Power Saving Mode On</button></li>
+        <li><button id='power_saving_off'>Power Saving Mode Off</button></li>
         <li><button id='reset'>Reset</button></li>
         <li><button id='increase_temperature'>Increase Temperature</button></li>
         <li><button id='decrease_temperature'>Decrease Temperature</button></li>
-        <li>Temperature: <!--thermostat.temperature--> </li>
-        <li>Colour: <!-- thermostat.color --> </li>
-        <li>Power Saving Mode Status: <!-- thermostat.powerSavingMode--> </li>
+        <li>Temperature: <span id='temperature'>Temp Place Holder</span></li>
+        <li>Colour: <span id='color'> Color Place Holder </li>
+        <li>Power Saving Mode Status: <span id='power_saving_status'>Status placeholder</span> </li>
       </ul>
     </div>
-    <script src='../src/thermostat.js'></script>
+    <script src='Thermostat.js'></script>
+    <script src="jquery.js"></script>
+    <script>
+      var thermostat = new Thermostat()
+      $(document).ready(function() {
+
+        $('#temperature').text(thermostat.temperature);
+
+        $('#color').text(thermostat.color());
+
+        $('#power_saving_status').text(thermostat.powerSavingMode);
+
+        $('#increase_temperature').click(function(){
+          thermostat.increaseTemperature();
+          $('#temperature').text(thermostat.temperature)
+          $('#color').text(thermostat.color())
+        });
+
+        $('#decrease_temperature').click(function(){
+          thermostat.decreaseTemperature();
+          $('#temperature').text(thermostat.temperature);
+          $('#color').text(thermostat.color())
+        });
+
+        $('#power_saving_on').click(function(){
+            thermostat.turnOnPowerSavingMode();
+            $('#power_saving_status').text(thermostat.powerSavingMode);
+        });
+        $('#power_saving_off').click(function(){
+            thermostat.turnOffPowerSavingMode();
+            $('#power_saving_status').text(thermostat.powerSavingMode);
+          });
+        });
+
+    </script>
   </body>
 </html>
