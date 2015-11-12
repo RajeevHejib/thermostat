@@ -7,15 +7,15 @@ function Thermostat() {
 }
 
 Thermostat.prototype.increaseTemperature = function(){
-  if (this.temperature == this.maximumTemperature) {
-    throw "Temperature already at maximum temperature";
+  if (this.temperature >= this.maximumTemperature) {
+    throw("Temperature already at maximum temperature");
   } else {
     ++this.temperature;
   }
 };
 
 Thermostat.prototype.decreaseTemperature = function(){
-  if (this.temperature == this.minimumTemperature) {
+  if (this.temperature <= this.minimumTemperature) {
     throw "Temperature already at minimum temperature";
   } else {
     --this.temperature;
@@ -30,6 +30,9 @@ Thermostat.prototype.turnOffPowerSavingMode = function(){
 Thermostat.prototype.turnOnPowerSavingMode = function(){
   this.powerSavingMode = true;
   this.maximumTemperature = 25;
+  if (this.temperature >= this.maximumTemperature){
+    this.temperature = this.maximumTemperature;
+  }
 };
 
 Thermostat.prototype.resetTemperature = function(){
@@ -38,10 +41,10 @@ Thermostat.prototype.resetTemperature = function(){
 
 Thermostat.prototype.color = function(){
   if (this.temperature < 18) {
-    return "Green";
+    return "green";
   } else if (this.temperature < 25) {
-    return "Yellow";
+    return "yellow";
   } else {
-    return "Red";
+    return "red";
   }
 };

@@ -1,55 +1,72 @@
-<!DOCTYPE html>
 <html>
   <head>
-    Thermostat
+    <title>Thermostat</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <div id='buttons'>
-      <ul>
-        <li><button id='power_saving_on'>Power Saving Mode On</button></li>
-        <li><button id='power_saving_off'>Power Saving Mode Off</button></li>
-        <li><button id='reset'>Reset</button></li>
-        <li><button id='increase_temperature'>Increase Temperature</button></li>
-        <li><button id='decrease_temperature'>Decrease Temperature</button></li>
-        <li>Temperature: <span id='temperature'>Temp Place Holder</span></li>
-        <li>Colour: <span id='color'> Color Place Holder </li>
-        <li>Power Saving Mode Status: <span id='power_saving_status'>Status placeholder</span> </li>
-      </ul>
+
+    <div id="container">
+
+      <div id="header">
+        <h1> Thermostat </h1>
+      </div>
+      <div id="temp"></div>
+
+      <div id=set_temp>
+        <button id="increase" type="button" class="button">+</button>
+        <button id="decrease" type="button" class="button">-</button>
+      </div>
+
+      <div id=controls>
+        <button id="reset" type="button" class="button">Reset</button>
+        <button id="psm" type="button" class="button">Power Saving On</button>
+      </div>
+
     </div>
-    <script src='Thermostat.js'></script>
-    <script src="jquery.js"></script>
-    <script>
-      var thermostat = new Thermostat()
-      $(document).ready(function() {
 
-        $('#temperature').text(thermostat.temperature);
-
-        $('#color').text(thermostat.color());
-
-        $('#power_saving_status').text(thermostat.powerSavingMode);
-
-        $('#increase_temperature').click(function(){
-          thermostat.increaseTemperature();
-          $('#temperature').text(thermostat.temperature)
-          $('#color').text(thermostat.color())
-        });
-
-        $('#decrease_temperature').click(function(){
-          thermostat.decreaseTemperature();
-          $('#temperature').text(thermostat.temperature);
-          $('#color').text(thermostat.color())
-        });
-
-        $('#power_saving_on').click(function(){
-            thermostat.turnOnPowerSavingMode();
-            $('#power_saving_status').text(thermostat.powerSavingMode);
-        });
-        $('#power_saving_off').click(function(){
-            thermostat.turnOffPowerSavingMode();
-            $('#power_saving_status').text(thermostat.powerSavingMode);
-          });
-        });
-
-    </script>
   </body>
+
+  <script src="../src/jquery.js"></script>
+  <script src="../src/Thermostat.js"></script>
+
+  <script>
+  $(function() {
+
+    var thermostat = new Thermostat();
+    $("#temp").text(thermostat.temperature);
+
+    $("#increase").on("click", function(){
+        thermostat.increaseTemperature();
+        $("#temp").text(thermostat.temperature);
+        $("#temp").css("background-color", thermostat.color());
+    });
+
+    $("#decrease").on("click", function(){
+        thermostat.decreaseTemperature();
+        $("#temp").text(thermostat.temperature);
+        $("#temp").css("background-color", thermostat.color());
+    });
+
+    $("#reset").on("click", function(){
+        thermostat.resetTemperature();
+        $("#temp").text(thermostat.temperature);
+        $("#temp").css("background-color", thermostat.color());
+    });
+
+    $("#psm").on("click", function(){
+      if (thermostat.powerSavingMode){
+        thermostat.turnOffPowerSavingMode();
+        $("#psm").text("Power Saving OFF");
+        $("#psm").css("color", "red");
+      } else {
+        thermostat.turnOnPowerSavingMode();
+        $("#psm").text("Power Saving ON");
+        $("#psm").css("color", "white");
+      }
+      $("#temp").text(thermostat.temperature);
+    });
+  });
+  </script>
+
+
 </html>
