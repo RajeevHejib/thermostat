@@ -37,11 +37,11 @@ body {
 #set_temp {
   color: #191970;
   text-align: center;
-  position: absolute;
-  width: 400px;
-  height: 50px;
-  top: 150;
-  height: 75px;
+  position: relative;
+  width: 178px;
+  height: 40px;
+  top: 2px;
+  left: 104px;
 }
 
 #increase {
@@ -65,10 +65,9 @@ body {
   color: #191970;
   text-align: center;
   position: absolute;
-  width: 400px;
-  height: 50px;
-  top: 200;
+  width: 390px;
   height: 75px;
+  top: 178px;
 }
 
 #reset {
@@ -79,6 +78,16 @@ body {
 #psm {
   width: 100px;
   height: 50px;
+}
+
+#outside-temp {
+  padding: 11px;
+  color: white;
+  text-align: center;
+  border-radius: 25px;
+  background-color: #B0E0E6;
+  height: 15px;
+  margin: 63px;
 }
 
 .button {
